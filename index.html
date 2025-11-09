@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Objections App</title>
-
-<!-- Manifest for full-screen on mobile -->
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Objections App - Emotional / Wise Ford Scripts</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#007BFF">
-
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
   body, html { height: 100%; width: 100%; background: white; overflow-y: auto; }
@@ -41,14 +37,14 @@
     width: 100%; padding: 12px; border-radius: 8px;
     background: #007BFF; color: white; font-weight: bold;
     font-size: 16px; border: none; cursor: pointer;
-    text-align: center; margin-bottom: 16px; /* extra space between paragraphs */
+    text-align: center; margin-bottom: 8px;
   }
   .button:hover { background: #0056b3; }
 
   .sub-button {
     width: 60%; padding: 8px; background: #444; color: white;
     border-radius: 8px; border: none; text-align: left;
-    cursor: pointer; display: block; margin-bottom: 16px; /* extra space between paragraphs */
+    cursor: pointer; display: block; margin-bottom: 6px;
     font-size: 10px; white-space: nowrap; overflow: hidden;
     text-overflow: ellipsis; float: right; clear: both;
   }
@@ -66,7 +62,7 @@
   .modal-content {
     background-color: #fefefe;
     border-radius: 10px;
-    width: 85%; max-width: 500px; max-height: 80vh;
+    width: 85%; max-width: 560px; max-height: 84vh;
     overflow-y: auto; padding: 20px; position: relative;
   }
   .close {
@@ -75,79 +71,105 @@
   }
   .close:hover { color: #000; }
   .instruction-title { margin-top: 10px; font-weight: bold; color: #333; }
+
+  p { margin-bottom: 14px; line-height: 1.45; }
+  .small { font-size: 13px; color: #555; }
 </style>
 </head>
 <body>
 
-<!-- Splash Screen -->
+<!-- Splash -->
 <div id="splash">
   <img src="LOGO.jpg" alt="Dealership Logo">
   <p>OBJECTIONS</p>
 </div>
 
-<!-- Main Page -->
+<!-- Main -->
 <div id="main">
 
-<!-- PAYMENT -->
+<!-- BUTTON GROUPS -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-payment-big')">MONTHLY PAYMENT TOO HIGH</button>
   <button class="sub-button" onclick="openModal('modal-payment-mpg')">MPG SAME</button>
   <button class="sub-button" onclick="openModal('modal-payment-mpg-hi')">MPG HIGHER (CURRENT CAR)</button>
+  <button class="sub-button" onclick="openModal('modal-payment-rate-wait')">WANT TO WAIT FOR LOWER RATES</button>
+  <button class="sub-button" onclick="openModal('modal-payment-bank-check')">WANT TO CHECK WITH BANK</button>
 </div>
 
-<!-- PRICE -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-price-high')">PRICE TOO HIGH</button>
   <button class="sub-button" onclick="openModal('modal-price-another')">OTHER DEALER CHEAPER</button>
   <button class="sub-button" onclick="openModal('modal-price-small')">SLIGHTLY HIGHER</button>
+  <button class="sub-button" onclick="openModal('modal-price-rebate-wait')">WAIT FOR NEXT REBATE</button>
 </div>
 
-<!-- TRADE-IN -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-trade-low')">TRADE-IN VALUE TOO LOW</button>
   <button class="sub-button" onclick="openModal('modal-trade-offer')">UNEXPECTED DEDUCTIONS</button>
   <button class="sub-button" onclick="openModal('modal-trade-value')">VALUE SLIGHTLY LOWER THAN EXPECTED</button>
+  <button class="sub-button" onclick="openModal('modal-trade-market-fluct')">MARKET FLUCTUATION CONCERN</button>
 </div>
 
-<!-- SPOUSE -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-spouse-talk')">NEED TO TALK TO SPOUSE</button>
   <button class="sub-button" onclick="openModal('modal-spouse-needs')">SPOUSE NEEDS TO SEE NUMBERS</button>
+  <button class="sub-button" onclick="openModal('modal-spouse-wait')">SPOUSE WANTS TIME TO THINK</button>
 </div>
 
-<!-- THINK ABOUT IT -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-think-later')">I WANT TO THINK ABOUT IT</button>
   <button class="sub-button" onclick="openModal('modal-think-time')">JUST NEED TIME TO DECIDE</button>
+  <button class="sub-button" onclick="openModal('modal-think-comparison')">WAITING TO COMPARE OTHER VEHICLES</button>
 </div>
 
-<!-- DOWN PAYMENT -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-down-low')">DOWN PAYMENT CONCERNS</button>
   <button class="sub-button" onclick="openModal('modal-down-adjust')">CAN REDUCE DOWN PAYMENT</button>
+  <button class="sub-button" onclick="openModal('modal-down-flex')">FLEXIBLE PAYMENT OPTIONS</button>
 </div>
 
-<!-- CREDIT -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-credit-bad')">CREDIT CONCERNS</button>
   <button class="sub-button" onclick="openModal('modal-credit-help')">NEED CREDIT GUIDANCE</button>
+  <button class="sub-button" onclick="openModal('modal-credit-cosigner')">CONSIDER CO-SIGNER</button>
+  <button class="sub-button" onclick="openModal('modal-credit-rate-wait')">WANT LOWER RATE BEFORE BUY</button>
 </div>
 
-<!-- OTHER DEALERS -->
 <div class="button-group">
   <button class="button" onclick="openModal('modal-dealer-other')">OTHER DEALER OFFER</button>
   <button class="sub-button" onclick="openModal('modal-dealer-offer')">FOUND ANOTHER DEALER DEAL</button>
+  <button class="sub-button" onclick="openModal('modal-dealer-details')">UNCLEAR COMPARISON DETAILS</button>
 </div>
 
-<!-- MODALS EXAMPLES -->
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-negative-equity')">NEGATIVE EQUITY</button>
+  <button class="sub-button" onclick="openModal('modal-negative-explain')">WORRIED ABOUT OWING MORE THAN CAR VALUE</button>
+  <button class="sub-button" onclick="openModal('modal-negative-roll')">ROLLING INTO NEW LOAN</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-not-ready')">NOT READY TO TRADE / BUY</button>
+  <button class="sub-button" onclick="openModal('modal-not-ready-commit')">FEELING COMMITMENT PRESSURE</button>
+  <button class="sub-button" onclick="openModal('modal-not-ready-budget')">WANT TO REVIEW BUDGET FIRST</button>
+</div>
+
+<!-- MODALS -->
+
+<!-- MONTHLY PAYMENT: main + subs -->
 <div id="modal-payment-big" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('modal-payment-big')">&times;</span>
     <b>Script:</b>
-    <p>I completely understand where you’re coming from — a higher monthly payment can feel intimidating, and I want to make sure this purchase truly fits your comfort level.</p>
-    <p>Let’s say you kept your current vehicle a little longer. You’d likely face repairs, maintenance costs, or even unexpected breakdowns that add stress and uncertainty. With this newer vehicle, those worries disappear — you gain warranty protection, improved reliability, and lower long-term operating costs, which often make up the difference in payment.</p>
+    <p>I completely understand — a higher monthly payment can feel overwhelming. It’s natural to pause and reflect on what’s comfortable for you.</p>
+
+    <p>Think of it this way: every dollar you invest in a Ford — whether it's an F-150 that proves its worth on tough days or an Expedition that carries your family — buys more than transportation. It buys <b>freedom from unexpected repairs</b>, <b>peace of mind with warranty protection</b>, and the quiet assurance that your daily drive will be reliable and safe.</p>
+
+    <p>Sometimes, waiting for a lower payment or rate feels like the safest choice, but often, it’s a delay that costs comfort and certainty. You have the chance to step into <b>control</b> today, rather than chasing tomorrow.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like to feel that clarity today, or keep chasing a number that may never come?"</p>
+
     <div class="instruction-title">Instruction:</div>
-    <p>Show customer monthly current versus new vehicle monthly costs including life elements like gas and maintenance. Speak with empathy first. Maintain calm tone and confident eye contact.</p>
+    <p>Lead with empathy and emotional value (safety, certainty). If they press numbers, show current vs. new total monthly cost including likely repairs, fuel, and warranty. Use a quick monthly breakdown on paper or the tablet.</p>
   </div>
 </div>
 
@@ -155,9 +177,16 @@
   <div class="modal-content">
     <span class="close" onclick="closeModal('modal-payment-mpg')">&times;</span>
     <b>Script:</b>
-    <p>I completely understand — if the MPG is about the same, it can feel like you’re not gaining enough value for the cost. That’s a fair concern.</p>
+    <p>I hear you — if the MPG is about the same, it can feel like you’re not gaining enough for the extra payment. That’s a fair observation.</p>
+
+    <p>But when you look deeper, a Ford’s value shows up in ways MPG can’t measure. The Escape or Edge may offer the same sip of fuel, but you also gain <b>advanced safety systems</b>, better technology, and <b>full warranty coverage</b> that keep your long-term costs and stress lower.</p>
+
+    <p>Your time and peace of mind are part of the equation — that’s the real “MPG” of living well.</p>
+
+    <p class="small"><b>Closer:</b> "If your monthly peace of mind covered the small MPG gap, would that change your thinking?"</p>
+
     <div class="instruction-title">Instruction:</div>
-    <p>Focus on reassurance and long-term peace of mind. Show total cost of ownership beyond MPG, including repairs and warranty coverage.</p>
+    <p>Compare total ownership (fuel + maintenance + repairs + warranty). Use simple numbers: show fuel delta per month and projected repair savings per year.</p>
   </div>
 </div>
 
@@ -165,30 +194,529 @@
   <div class="modal-content">
     <span class="close" onclick="closeModal('modal-payment-mpg-hi')">&times;</span>
     <b>Script:</b>
-    <p>I appreciate you mentioning your current car’s MPG — it’s great that it’s been efficient. I can tell you’ve taken pride in choosing wisely.</p>
+    <p>I appreciate that your current car gets slightly better MPG — that shows you think ahead. Smart move.</p>
+
+    <p>Even so, MPG is only one lens. Moving into a new Ford often brings <b>modern safety</b>, <b>reduced repair stress</b>, and <b>upgraded technology</b>. For many customers, those gains outweigh a handful of extra cents per mile because they bring <b>clarity</b> and confidence every time they drive.</p>
+
+    <p class="small"><b>Closer:</b> "Would you rather save a little on gas or sleep easier knowing your family is safer and the car is covered?"</p>
+
     <div class="instruction-title">Instruction:</div>
-    <p>Start by validating their current decision, then bridge to larger cost-of-ownership value. Include monthly cost comparison including repairs, fuel, and maintenance.</p>
+    <p>Respect their efficiency concerns; then pivot to reliability and safety. Offer a month-by-month fuel/repair comparison for clarity.</p>
   </div>
 </div>
 
-<!-- Add other modals here following the same structure -->
+<div id="modal-payment-rate-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-payment-rate-wait')">&times;</span>
+    <b>Script:</b>
+    <p>Waiting for interest rates to drop is understandable. Timing feels like control.</p>
 
-</div> <!-- End Main -->
+    <p>But markets are unpredictable. Meanwhile, the guarantee of owning a reliable Ford — whether it's a family-ready Expedition or a workhorse F-150 — is a concrete improvement to your daily life. Waiting can mean missing the right match for your needs.</p>
+
+    <p class="small"><b>Closer:</b> "If we could structure a payment that gives you the reliability now and keeps monthly cost comfortable, would you prefer to act today?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer current rate examples and show trade-offs. If possible, present alternative term options to reduce monthly impact while locking in the vehicle now.</p>
+  </div>
+</div>
+
+<div id="modal-payment-bank-check" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-payment-bank-check')">&times;</span>
+    <b>Script:</b>
+    <p>Checking with your bank is a smart step — I’d do the same. Your diligence shows you care about the long view.</p>
+
+    <p>Sometimes bank quotes don’t include manufacturer incentives, or they don’t account for warranty and dealer support that come with a Ford purchase. Combining bank insight with what we offer gives you full <b>clarity</b> and true <b>control</b>.</p>
+
+    <p class="small"><b>Closer:</b> "Want me to run a side-by-side with your bank quote so you can see which one gives you more protection and value?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer to run a simultaneous comparison: bank rate vs dealership-financed rate including incentives. Highlight warranty and service benefits in the dealer option.</p>
+  </div>
+</div>
+
+<!-- PRICE -->
+<div id="modal-price-high" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-high')">&times;</span>
+    <b>Script:</b>
+    <p>Price matters — you want to be sure you’re getting the best value.</p>
+
+    <p>But the sticker is only one story. Ask yourself what peace of mind is worth: the warranty on a new Ford, the safety tech that protects your family, and the time you save not dealing with repairs. These are the parts of value that don't show on a tag but change your life.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like to compare the total cost of ownership side-by-side to see the whole picture?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Prepare a total cost chart (insurance, fuel, repairs, warranty). Highlight intangible benefits (safety tech, dealer service).</p>
+  </div>
+</div>
+
+<div id="modal-price-another" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-another')">&times;</span>
+    <b>Script:</b>
+    <p>It’s great you’re shopping for the best deal — that’s smart.</p>
+
+    <p>Let’s compare apples-to-apples. Sometimes lower sticker prices at other dealers hide extra fees, shorter warranties, or missing features. When you include total value, our offer for the Ford often proves stronger.</p>
+
+    <p class="small"><b>Closer:</b> "If I show you the full breakdown — fees, warranty, and features — would you compare it to their offer now?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Ask for their competitor quote. Produce a side-by-side with your total cost, warranty coverages, and included services.</p>
+  </div>
+</div>
+
+<div id="modal-price-small" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-small')">&times;</span>
+    <b>Script:</b>
+    <p>A slightly higher price can sting at first glance.</p>
+
+    <p>But often that difference buys <b>better safety features</b>, more standard equipment, and stronger coverage — the things that protect you and save stress later. Think of it as paying for a quieter tomorrow.</p>
+
+    <p class="small"><b>Closer:</b> "If that small difference delivered bigger peace of mind, would you take it?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Highlight what the small price difference includes (safety, warranty, services). Let them visualize future convenience.</p>
+  </div>
+</div>
+
+<div id="modal-price-rebate-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-rebate-wait')">&times;</span>
+    <b>Script:</b>
+    <p>Waiting for the next rebate is tempting — who wouldn’t chase extra savings?</p>
+
+    <p>But rebates are uncertain and often come with limited inventory or competing buyers. Meanwhile, you can secure the exact Ford that meets your needs now — and that certainty can be worth more than a hypothetical future discount.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like to lock in this level of value today and still keep options open if a promotion appears later?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain timing/risk of rebates. Offer to hold vehicle short-term if possible, or show immediate incentives available now.</p>
+  </div>
+</div>
+
+<!-- TRADE-IN -->
+<div id="modal-trade-low" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-low')">&times;</span>
+    <b>Script:</b>
+    <p>I get it — a low trade-in offer can feel like a disappointment.</p>
+
+    <p>Trade values follow market conditions, mileage, and condition. By reviewing the details together and addressing minor issues, we can often find ways to increase your value or show where the numbers come from so you have full <b>clarity</b>.</p>
+
+    <p class="small"><b>Closer:</b> "Want me to walk through the inspection and values so you can see exactly how we arrived at this number?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Show the evaluation report, explain deductions, and discuss simple fixes (detailing, minor repairs) that may increase offer.</p>
+  </div>
+</div>
+
+<div id="modal-trade-offer" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-offer')">&times;</span>
+    <b>Script:</b>
+    <p>Unexpected deductions are frustrating — that reaction is natural.</p>
+
+    <p>Each deduction usually maps to a real cost: tires, body wear, or mechanical items. Transparency gives you <b>control</b>. Let’s review them so nothing feels hidden.</p>
+
+    <p class="small"><b>Closer:</b> "Shall we go through each deduction together so you can confirm or question any item?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain each deduction. Provide photos or inspection notes if available. Offer options to re-evaluate after repairs or detailing.</p>
+  </div>
+</div>
+
+<div id="modal-trade-value" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-value')">&times;</span>
+    <b>Script:</b>
+    <p>A trade-in slightly lower than expected is worth unpacking.</p>
+
+    <p>Minor factors like regional demand, color, or added mileage can shift values. Understanding them gives you <b>clarity</b> and often a route to improve the number.</p>
+
+    <p class="small"><b>Closer:</b> "If we adjusted a couple small items or waited a short time, would that make you comfortable moving forward?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Show market comps and explain which items matter most. Suggest quick fixes or timing adjustments to improve offer.</p>
+  </div>
+</div>
+
+<div id="modal-trade-market-fluct" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-market-fluct')">&times;</span>
+    <b>Script:</b>
+    <p>Market fluctuation is real — it can make trade-in timing tricky.</p>
+
+    <p>Locking a fair offer now may protect you from a downward swing. That certainty is a form of <b>control</b> you can use to plan confidently.</p>
+
+    <p class="small"><b>Closer:</b> "Would you prefer the certainty of this offer, or try to time the market and risk a lower number?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Show recent trend data if available and present the pros/cons of holding vs selling privately vs trading now.</p>
+  </div>
+</div>
+
+<!-- SPOUSE -->
+<div id="modal-spouse-talk" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-spouse-talk')">&times;</span>
+    <b>Script:</b>
+    <p>It’s right to want your spouse involved — decisions like this deserve both voices.</p>
+
+    <p>We’ll prepare a clear summary of numbers and benefits so the conversation is calm and productive. That clarity gives both of you <b>control</b> over the outcome.</p>
+
+    <p class="small"><b>Closer:</b> "Want to call them now and walk through the highlights together?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer a one-page summary, bring them into the conversation via call or video, and be ready to answer specific spouse questions.</p>
+  </div>
+</div>
+
+<div id="modal-spouse-needs" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-spouse-needs')">&times;</span>
+    <b>Script:</b>
+    <p>Your spouse wanting the numbers is perfectly reasonable.</p>
+
+    <p>We’ll show monthly payments, warranty coverage, fuel estimates, and trade-in figures so both of you can see the full picture without stress.</p>
+
+    <p class="small"><b>Closer:</b> "If it looks solid on paper, would you be comfortable moving forward?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Provide a neat, easy-to-read breakdown and offer to email or print it for review together.</p>
+  </div>
+</div>
+
+<div id="modal-spouse-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-spouse-wait')">&times;</span>
+    <b>Script:</b>
+    <p>It’s okay to want to wait until your spouse has time to consider.</p>
+
+    <p>We’ll make the information effortless to review so the decision is calm and confident — not pressured.</p>
+
+    <p class="small"><b>Closer:</b> "Would a short follow-up tomorrow or a printed summary help your spouse decide?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer to schedule a specific follow-up time; provide a takeaway summary and invite any follow-up questions.</p>
+  </div>
+</div>
+
+<!-- THINK ABOUT IT -->
+<div id="modal-think-later" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-think-later')">&times;</span>
+    <b>Script:</b>
+    <p>Thinking it over shows you want the right decision — that’s wise.</p>
+
+    <p>I’ll give you a simple comparison of costs and benefits so you can think clearly, not emotionally, and return to the decision with confidence.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like me to hold the vehicle while you think, or would you prefer a 24-hour follow-up?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer a short hold/backup plan if possible. Provide a simple comparison and schedule a follow-up call within a date/time window.</p>
+  </div>
+</div>
+
+<div id="modal-think-time" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-think-time')">&times;</span>
+    <b>Script:</b>
+    <p>Taking time to decide is normal.</p>
+
+    <p>We’ll prepare an easy-to-read side-by-side: your current car vs the Ford you like — payments, fuel, insurance, and likely repair savings — so you can decide from <b>clarity</b>, not pressure.</p>
+
+    <p class="small"><b>Closer:</b> "Do you want that summary emailed or printed?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer both digital and printed options, and set an explicit follow-up timeframe.</p>
+  </div>
+</div>
+
+<div id="modal-think-comparison" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-think-comparison')">&times;</span>
+    <b>Script:</b>
+    <p>Comparing vehicles is smart — you want to be sure it’s the right fit.</p>
+
+    <p>We’ll pull a comparison showing features, safety, and ownership costs so you can clearly see where each option wins.</p>
+
+    <p class="small"><b>Closer:</b> "If this one wins on total value, are you ready to move forward?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Prepare a feature and cost comparison. Highlight wins specific to the customer's priorities (towing, safety, tech).</p>
+  </div>
+</div>
+
+<!-- DOWN PAYMENT -->
+<div id="modal-down-low" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-down-low')">&times;</span>
+    <b>Script:</b>
+    <p>A larger down payment is helpful, but not always necessary.</p>
+
+    <p>We can structure a plan that reduces upfront cash while still delivering <b>warranty</b> and the reliability of a Ford. That gives you <b>control</b> of your cash flow without sacrificing the gains of a new vehicle.</p>
+
+    <p class="small"><b>Closer:</b> "Would a lower down payment that keeps your monthly comfortable help you decide?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Show down payment scenarios and resulting monthly numbers; explain trade-offs of higher interest vs cash availability.</p>
+  </div>
+</div>
+
+<div id="modal-down-adjust" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-down-adjust')">&times;</span>
+    <b>Script:</b>
+    <p>Reducing the down payment is a valid option if you need cash for other priorities.</p>
+
+    <p>We’ll model a reduced down payment and show how terms change so you can choose the best balance of cash and monthly comfort.</p>
+
+    <p class="small"><b>Closer:</b> "Want me to show you a 12-, 36-, and 60-month example so you can pick what's best?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Present multiple scenarios and let the customer choose; highlight long-term cost vs short-term ease.</p>
+  </div>
+</div>
+
+<div id="modal-down-flex" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-down-flex')">&times;</span>
+    <b>Script:</b>
+    <p>Flexible payment options exist to protect your monthly budget while delivering the Ford you want.</p>
+
+    <p>We can explore term, down payment, and possible incentives to shape a plan that fits your life and keeps you in control.</p>
+
+    <p class="small"><b>Closer:</b> "Would flexible terms make you feel comfortable moving forward today?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Show blended options (term + down payment + incentives) and recommend the option that minimizes total pain while securing the car.</p>
+  </div>
+</div>
+
+<!-- CREDIT -->
+<div id="modal-credit-bad" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-bad')">&times;</span>
+    <b>Script:</b>
+    <p>Credit questions are common; you’re not alone.</p>
+
+    <p>There are routes to get you into a Ford while we work on improving the financial profile. We’ll find realistic options that preserve <b>reliability</b> and safety for you and your family.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like me to run a conservative estimate so we can see realistic monthly numbers right now?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer conservative financing examples and alternative programs; discuss co-signer or deferred solutions if available.</p>
+  </div>
+</div>
+
+<div id="modal-credit-help" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-help')">&times;</span>
+    <b>Script:</b>
+    <p>We can walk you through credit options step-by-step.</p>
+
+    <p>This guidance gives you <b>clarity</b> and the ability to make a controlled, informed financing choice without feeling rushed or overwhelmed.</p>
+
+    <p class="small"><b>Closer:</b> "Want a quick plan to improve your financing over the next 6–12 months, or do you need a solution now?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Outline concrete next steps for credit improvement and show payment simulations for now vs later.</p>
+  </div>
+</div>
+
+<div id="modal-credit-cosigner" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-cosigner')">&times;</span>
+    <b>Script:</b>
+    <p>A co-signer can be a practical solution to secure better financing if that option is available to you.</p>
+
+    <p>It’s a way to gain access to more favorable terms while you build back your profile.</p>
+
+    <p class="small"><b>Closer:</b> "Would discussing a co-signer option be helpful so we can see the numbers?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain co-signer roles and impact on rate; present examples with and without co-signer to show benefits.</p>
+  </div>
+</div>
+
+<div id="modal-credit-rate-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-rate-wait')">&times;</span>
+    <b>Script:</b>
+    <p>Waiting for lower rates is understandable, but timing is uncertain.</p>
+
+    <p>If the vehicle you want is available now, securing it with a practical plan may be wiser than risking future increases or losing the exact Ford you chose.</p>
+
+    <p class="small"><b>Closer:</b> "If we modeled a conservative rate and it still fits your budget, would you consider moving forward today?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Run conservative-rate scenarios and show availability risk vs potential savings from waiting.</p>
+  </div>
+</div>
+
+<!-- OTHER DEALER -->
+<div id="modal-dealer-other" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-dealer-other')">&times;</span>
+    <b>Script:</b>
+    <p>It’s good you’re checking other dealers — you want the best outcome.</p>
+
+    <p>Let’s make sure the comparison is complete: fees, warranty length, included services, and the actual vehicle condition. When we compare total value, you’ll know which offer truly wins.</p>
+
+    <p class="small"><b>Closer:</b> "Want me to compare our offer line-by-line with theirs?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Request competitor quote details and produce a side-by-side comparison factoring in warranty and dealer service.</p>
+  </div>
+</div>
+
+<div id="modal-dealer-offer" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-dealer-offer')">&times;</span>
+    <b>Script:</b>
+    <p>Finding another dealer’s deal is normal; let’s examine it carefully.</p>
+
+    <p>Sometimes a lower price lacks items you value, like dealer servicing or extended warranty. We’ll show the full value so you can choose from <b>clarity</b>.</p>
+
+    <p class="small"><b>Closer:</b> "If our full-value comparison still favors us, would you choose to stay?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain included/excluded items clearly and show the long-term value differences.</p>
+  </div>
+</div>
+
+<div id="modal-dealer-details" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-dealer-details')">&times;</span>
+    <b>Script:</b>
+    <p>If the comparison details are unclear, I can break everything down so nothing surprises you later.</p>
+
+    <p>Clarity is control — let’s review all numbers, features, and warranties together so you can make an informed choice.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like the full line-by-line now or an emailed copy to review?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer both immediate walkthrough and a digital copy for review; highlight differences in plain language.</p>
+  </div>
+</div>
+
+<!-- NEGATIVE EQUITY -->
+<div id="modal-negative-equity" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-negative-equity')">&times;</span>
+    <b>Script:</b>
+    <p>Negative equity is stressful, but it can be managed.</p>
+
+    <p>We’ll explore options: rollover with clear payment modeling, trade-in strategies to minimize impact, or waiting while you pay down the balance. Your financial control is the goal.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like me to show realistic payment scenarios that account for your current balance?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Show scenarios: roll-in vs pay-off vs private sale. Present monthly impact and risks plainly.</p>
+  </div>
+</div>
+
+<div id="modal-negative-explain" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-negative-explain')">&times;</span>
+    <b>Script:</b>
+    <p>Worrying about owing more than a car is normal.</p>
+
+    <p>We’ll explain how the numbers work and find solutions that avoid surprise payments and preserve your long-term comfort and stability.</p>
+
+    <p class="small"><b>Closer:</b> "Shall I model the options now so you can choose the least-risk path?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Break down the payoff, trade-in value, and potential rolled amounts. Show a conservative monthly plan option.</p>
+  </div>
+</div>
+
+<div id="modal-negative-roll" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-negative-roll')">&times;</span>
+    <b>Script:</b>
+    <p>Rolling negative equity into a new loan is possible but needs careful design.</p>
+
+    <p>We’ll show how it affects monthly payments and overall cost so you can decide with <b>clarity</b>.</p>
+
+    <p class="small"><b>Closer:</b> "If a rolled plan kept your monthly payment within comfort, would you consider it?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Present rolled vs non-rolled scenarios, explain interest and term impacts, and recommend conservative options.</p>
+  </div>
+</div>
+
+<!-- NOT READY -->
+<div id="modal-not-ready" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-not-ready')">&times;</span>
+    <b>Script:</b>
+    <p>Not being ready is perfectly fine. The right choice takes a little time.</p>
+
+    <p>I’ll make it simple: clear numbers, plain language, and no pressure. That’s how you gain true <b>control</b> over this decision.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like to set a specific follow-up so this isn’t left open-ended?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer a concrete follow-up time and a printed/digital summary to reduce friction for the next meeting.</p>
+  </div>
+</div>
+
+<div id="modal-not-ready-commit" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-not-ready-commit')">&times;</span>
+    <b>Script:</b>
+    <p>Feeling pressure about commitment is normal — big decisions are weighty.</p>
+
+    <p>We’ll remove the pressure by focusing on facts and small steps so you feel comfortable with whatever choice you make.</p>
+
+    <p class="small"><b>Closer:</b> "Would a short test drive and a simple written summary ease that pressure?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer low-pressure next steps: test drive, printed comparison, and a scheduled follow-up that suits their timeline.</p>
+  </div>
+</div>
+
+<div id="modal-not-ready-budget" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-not-ready-budget')">&times;</span>
+    <b>Script:</b>
+    <p>Reviewing your budget first is the responsible choice.</p>
+
+    <p>We’ll show realistic monthly scenarios and flexible solutions so you can be confident your budget stays healthy while you get the Ford you need.</p>
+
+    <p class="small"><b>Closer:</b> "Would a conservative payment plan that leaves room in your budget be helpful?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Present conservative payment options and emphasize preservation of cash flow and financial goals.</p>
+  </div>
+</div>
+
+</div> <!-- end main -->
 
 <script>
   setTimeout(() => {
-    document.getElementById('splash').style.opacity = '0';
+    const s = document.getElementById('splash');
+    s.style.opacity = '0';
     setTimeout(() => {
-      document.getElementById('splash').style.display = 'none';
+      s.style.display = 'none';
       document.getElementById('main').style.display = 'block';
-    }, 1000);
-  }, 2000);
+    }, 450);
+  }, 1200);
 
-  function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-  function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+  function openModal(id) {
+    const m = document.getElementById(id);
+    if (m) m.style.display = 'flex';
+  }
+  function closeModal(id) {
+    const m = document.getElementById(id);
+    if (m) m.style.display = 'none';
+  }
   window.onclick = function(event) {
     document.querySelectorAll('.modal').forEach(modal => {
-      if (event.target == modal) modal.style.display = "none";
+      if (event.target === modal) modal.style.display = "none";
     });
   }
 </script>
