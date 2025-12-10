@@ -1442,7 +1442,7 @@ trims: [
           strengths: [
             "Specialized off-road tuned suspension with 9.4 inches of ground clearance.",
             "Advanced 4WD system with twin-clutch rear drive unit (rear axle lock).",
-            "Unique off-road features: Trail Control™ and dedicated skid plates.",
+            "Unique off-road features: Trail Control and dedicated skid plates.",
             "Rugged, unique exterior styling with orange accents and all-terrain tires.",
             "Lower towing capacity (2,000 lbs) than the XLT/Lariat with 4K package."
           ],
@@ -2149,6 +2149,43 @@ trims: [
       image: "./images/Transit.jpg",
       price: "$58,680",
       trims: [
+      {
+          name: "Cargo Van T-150 (LR)",
+          price: "$47,400", // Starting price
+          engine: "3.5L PFDi V6",
+          horsepower: "275 hp",
+          torque: "260 lb-ft",
+          transmission: "10-speed Automatic SelectShift",
+          transmissionOptions: "3.5L EcoBoost V6 (310 hp / 400 lb-ft)", // Highest engine option
+          towing: "7,500 lbs", // Max towing based on typical Transit configurations
+          suspension: "Independent MacPherson-strut / Leaf springs",
+          groundClearance: "7.0 in", // Estimated average
+          bedSize: "126 in (at floor)", // Max Cargo Length
+          bluecruise: "No",
+          cam360: "Optional", // Based on 360-Degree Camera with Split View feature
+          heatedSeats: "No",
+          clothSeats: "Optional", // Dark Palazzo Gray Cloth is an option
+          upgradedOptions: "Intelligent All-Wheel Drive, SYNC 4 w/ 12\" Display",
+          other: "Standard Ford Pro Telematics, Max Payload 3,668 lbs (RWD)", // Highest payload in the T-150 section
+          competitors:
+            "Competitors: Ram ProMaster Cargo Van, Chevrolet Express Cargo Van. The Transit T-150 offers superior payload capacity and the flexibility of the powerful EcoBoost V6 and Intelligent All-Wheel Drive options.",
+          image: "./images/Transit_CargoVan_T150.jpg", // Placeholder image path
+          useTitle: "Versatile Standard Cargo",
+          strengths: [
+            "High Payload Capacity (up to 3,668 lbs) for a T-150.",
+            "Standard powerful 3.5L PFDi V6 engine.",
+            "Features the Ford Pro Telematics system for fleet management.",
+            "Low roof and regular length make it easy to maneuver in urban environments."
+          ],
+          usage: [
+            "Local delivery and light service work.",
+            "Tradespeople needing a reliable, maneuverable work van."
+          ],
+          demographic: [
+            "Small business owners, contractors, and light fleet operators.",
+            "Users prioritizing maneuverability and payload over extreme volume."
+          ]
+        },
         {
           name: "Passenger Van XL",
           price: "$58,680",
