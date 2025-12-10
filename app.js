@@ -2831,7 +2831,29 @@ function getFootnoteText(trimData) {
   return { footnotes, taggedTermMap };
 }
 
-// --- TRANSIT CONFIG CARD COMPONENT (UPDATED) ---
+// Data for the Comprehensive Transit Table (7 Columns)
+const comprehensiveTransitData = [
+    // --- Transit-150 Series ---
+    { model: "T-150 Cargo", duty: "Std", gvwr: "8.6k", payload: "3.8k", towing: "6.9k", roof: "L/M/H", seating: "2" },
+    { model: "T-150 Pass XL", duty: "Std", gvwr: "9.0k", payload: "2.8k", towing: "4.6k", roof: "L/M/H", seating: "8-12" },
+    { model: "T-150 Pass XLT", duty: "Std", gvwr: "9.0k", payload: "2.8k", towing: "4.6k", roof: "L/M/H", seating: "8-12" },
+    
+    // --- Transit-250 Series ---
+    { model: "T-250 Cargo", duty: "Hvy", gvwr: "9.1-9.9k", payload: "4.5k", towing: "6.9k", roof: "M/H", seating: "2" },
+    { model: "T-250 Pass XL", duty: "Hvy", gvwr: "9.4k", payload: "3.3k", towing: "4.6k", roof: "M/H", seating: "12-15" },
+    { model: "T-250 Pass XLT", duty: "Hvy", gvwr: "9.4k", payload: "3.3k", towing: "4.6k", roof: "M/H", seating: "12-15" },
+    
+    // --- Transit-350 Series (SRW) ---
+    { model: "T-350 Cargo (SRW)", duty: "Max", gvwr: "9.5k", payload: "4.2k", towing: "6.9k", roof: "M/H", seating: "2" },
+    { model: "T-350 Pass XL (SRW)", duty: "Max", gvwr: "9.5k", payload: "3.2k", towing: "4.6k", roof: "M/H", seating: "15" },
+    
+    // --- Transit-350 Series (DRW) ---
+    { model: "T-350 Cargo (DRW)", duty: "DRW", gvwr: "11.0k", payload: "4.6k", towing: "7.5k", roof: "H Only", seating: "2" },
+    { model: "T-350 Pass XL (DRW)", duty: "DRW", gvwr: "11.0k", payload: "3.1k", towing: "7.5k", roof: "H Only", seating: "15" },
+];
+
+
+// --- TRANSIT CONFIG CARD COMPONENT ---
 
 function TransitConfigCard({ vehicleSpecs }) {
   const cardStyle = {
@@ -2849,27 +2871,34 @@ function TransitConfigCard({ vehicleSpecs }) {
     textAlign: 'center'
   };
 
+  const tableWrapperStyle = {
+    // Scroll removed by instruction, rely on narrow columns
+    marginBottom: '10px',
+    maxWidth: '100%',
+    overflowX: 'hidden' // Force hidden just in case of slight overflow
+  };
+    
   const tableStyle = {
     width: '100%',
     borderCollapse: 'collapse',
-    marginBottom: '10px',
-    fontSize: '11px',
+    fontSize: '8px', // Reduced font size for data rows
     backgroundColor: 'white',
     border: '1px solid #a5d6a7'
   };
 
   const thStyle = {
     border: '1px solid #a5d6a7',
-    padding: '8px 4px',
+    padding: '4px 1px', // Reduced padding
     textAlign: 'center',
     backgroundColor: '#c8e6c9', // Header background
     fontWeight: 'bold',
-    color: '#004d40'
+    color: '#004d40',
+    fontSize: '8px' // Reduced font size for headers
   };
 
   const tdStyle = {
     border: '1px solid #a5d6a7',
-    padding: '6px 4px',
+    padding: '3px 1px', // Reduced padding
     textAlign: 'center'
   };
   
@@ -2880,79 +2909,127 @@ function TransitConfigCard({ vehicleSpecs }) {
       borderBottom: '2px solid #a5d6a7', 
       paddingBottom: '5px'
   };
+  
+  // Define column widths for even distribution and minimal total width
+  // Total width of table is 100%. 
+  const modelWidth = "25%"; // Model Name (must be readable)
+  const evenColWidth = "12.5%"; // Duty, Weight, Plyd, Tow, Roof, Seats (75% / 6)
+  
+  // Helper to render the comprehensive table
+  const renderComprehensiveTable = () => React.createElement(
+      "div",
+      { style: tableWrapperStyle },
+      React.createElement(
+          "table",
+          { style: tableStyle },
+          React.createElement(
+              "thead",
+              null,
+              React.createElement(
+                  "tr",
+                  null,
+                  React.createElement("th", { style: thStyle, width: modelWidth }, "Model / Trim"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Duty"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Weight"), // GVWR condensed
+                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Plyd"), // Payload condensed
+                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Tow"), // Towing condensed
+                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Roof"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Seats") // Seating condensed
+              )
+          ),
+          React.createElement(
+              "tbody",
+              null,
+              comprehensiveTransitData.map((item, index) =>
+                  React.createElement(
+                      "tr",
+                      { key: index },
+                      // Model cell keeps slightly larger text and left alignment
+                      React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left', paddingLeft: '3px', fontSize: '9px' } }, item.model),
+                      // All other cells are small and centered
+                      React.createElement("td", { style: tdStyle }, item.duty),
+                      React.createElement("td", { style: tdStyle }, item.gvwr),
+                      React.createElement("td", { style: tdStyle }, item.payload),
+                      React.createElement("td", { style: tdStyle }, item.towing),
+                      React.createElement("td", { style: tdStyle }, item.roof),
+                      React.createElement("td", { style: tdStyle }, item.seating)
+                  )
+              )
+          )
+      )
+  );
+  
+  // Formatted Notes List (Updated with new abbreviations, scroll note removed)
+  const formattedNotes = [
+      "SRW = Single Rear Wheel",
+      "DRW = Dual Rear Wheel",
+      "L/M/H = Low, Medium, High Roof Heights",
+      "Plyd = Payload",
+      "Tow = Towing",
+      "Weight = GVWR (Gross Vehicle Weight Rating)",
+      "k = 1,000 lbs (used for Weight, Plyd, Tow figures)",
+      "NOTE: Max figures are approximate and based on optimal configuration.",
+  ];
+
 
   return React.createElement(
     "div",
     { style: cardStyle },
     
     // Title Section
-    React.createElement("h3", { style: { color: '#004d40', marginBottom: '5px' } }, "Transit Configuration Guide"),
-    React.createElement("p", { style: { fontSize: '12px', color: '#388e3c', marginTop: '0', fontWeight: 'bold' } }, "Quick Reference for Dimensions & Models"),
+    React.createElement("h3", { style: { color: '#004d40', marginBottom: '5px' } }, "TRANSIT CONFIGURATION GUIDE"),
+    React.createElement("p", { style: { fontSize: '12px', color: '#388e3c', marginTop: '0', fontWeight: 'bold', fontStyle: 'italic' } }, "Quick Reference for Dimensions & Models"),
     
-    // Identity Matrix Table
-    React.createElement("h4", { style: h4Style }, "Model & Configuration Matrix"),
+    // 1. Comprehensive Specification Table (MAX CONDENSATION)
+    React.createElement("h4", { style: h4Style }, "MODEL SPECIFICATIONS"),
+    renderComprehensiveTable(),
+    
+    // Formatted Notes List 
     React.createElement(
-      "table",
-      { style: tableStyle },
-      
-      // Table Header
-      React.createElement(
-        "thead",
-        null,
-        React.createElement(
-          "tr",
-          null,
-          React.createElement("th", { style: thStyle }, "Transit Model"),
-          React.createElement("th", { style: thStyle }, "Wheelbase"),
-          React.createElement("th", { style: thStyle }, "Roof"),
-          React.createElement("th", { style: thStyle }, "Body Length")
-        )
-      ),
-      
-      // Table Body (Data from identityMatrix)
-      React.createElement(
-        "tbody",
-        null,
-        vehicleSpecs.identityMatrix.map((item, index) =>
-          React.createElement(
-            "tr",
-            { key: index },
-            React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold' } }, item.name),
-            React.createElement("td", { style: tdStyle }, item.wheelbase.join(" / ")),
-            React.createElement("td", { style: tdStyle }, item.roof.join(" / ")),
-            React.createElement("td", { style: tdStyle }, item.bodyLength.join(" / "))
-          )
-        )
+      "ul",
+      { style: { listStyleType: 'none', padding: '0', fontSize: '9px', textAlign: 'left', margin: '0 0 15px 0' } },
+      formattedNotes.map((note, index) => 
+        React.createElement("li", { key: index, style: { color: '#999', lineHeight: '1.4' } }, note)
       )
     ),
 
-    // Key Dimensions Section
-    React.createElement("h4", { style: h4Style }, "Key Dimensions"),
+    // 2. Key Dimensions Section (Existing with Image)
+    React.createElement("h4", { style: h4Style }, "KEY ROOF & LENGTH DIMENSIONS"),
     
-    // IMAGE ADDED HERE
-    React.createElement("img", {
-      src: "./images/transit_height_visual.jpg", // <--- USE THIS FILENAME
-      alt: "Ford Transit Height Dimensions: Low, Medium, and High Roofs",
-      style: { 
-        width: "100%", 
-        height: "auto", 
-        border: "1px solid black", // Added border as requested
-        borderRadius: "5px", 
-        marginBottom: "10px" 
-      }
-    }),
+    // --- HEIGHT DIAGRAM ---
+    React.createElement("div", { style: { textAlign: 'center', marginBottom: '15px' } },
+        React.createElement("img", {
+          src: "./images/transit_height_visual.jpg", 
+          alt: "Ford Transit Height Dimensions: Low, Medium, and High Roofs",
+          style: { 
+            width: "100%", 
+            height: "auto", 
+            maxWidth: '350px',
+            border: "1px solid black", 
+            borderRadius: "5px", 
+            marginBottom: "5px" 
+          }
+        }),
+        React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "Roof Height Comparison")
+    ),
+
+    // --- LENGTH DIAGRAM ---
+    React.createElement("div", { style: { textAlign: 'center', marginBottom: '15px' } },
+        ""
+    ),
+
     
+    // Dimension List
     React.createElement(
       "ul",
       { style: { listStyleType: 'none', padding: '0', fontSize: '12px', textAlign: 'left' } },
       
-      // DELETED: Low Roof Height
-      // DELETED: Medium Roof Height
-      // DELETED: High Roof Height
-      
       React.createElement("li", { style: { marginBottom: '5px' } }, 
           React.createElement("b", { style: { color: '#00796b' } }, "Regular Length: "), vehicleSpecs.dimensions.regularLength),
           
+      React.createElement("li", { style: { marginBottom: '5px' } }, 
+          React.createElement("b", { style: { color: '#00796b' } }, "Long Length: "), "237.6 in"),
+
       React.createElement("li", { style: { marginBottom: '5px' } }, 
           React.createElement("b", { style: { color: '#00796b' } }, "Extended Length (EL): "), vehicleSpecs.dimensions.extendedLength),
           
@@ -2960,17 +3037,17 @@ function TransitConfigCard({ vehicleSpecs }) {
           React.createElement("b", { style: { color: '#00796b' } }, "Wheelbases: "), vehicleSpecs.dimensions.wheelbases.join(" & ")),
     ),
     
-    // Cargo Volume Section
-    React.createElement("h4", { style: h4Style }, "Max Cargo Volume (High Roof, Extended)"),
+    // 3. Cargo Volume Section (Existing)
+    React.createElement("h4", { style: h4Style }, "MAX CARGO VOLUME"),
     React.createElement(
       "ul",
       { style: { listStyleType: 'none', padding: '0', fontSize: '12px', textAlign: 'left' } },
       
       React.createElement("li", { style: { marginBottom: '5px' } }, 
-          React.createElement("b", { style: { color: '#00796b' } }, "Cargo Van: "), vehicleSpecs.maxCapacities.cargoVanVolume),
+          React.createElement("b", { style: { color: '#00796b' } }, "Cargo Van (Max Capacity): "), vehicleSpecs.maxCapacities.cargoVanVolume),
       
       React.createElement("li", { style: { marginBottom: '5px' } }, 
-          React.createElement("b", { style: { color: '#00796b' } }, "Passenger Van: "), vehicleSpecs.maxCapacities.passengerVanVolume),
+          React.createElement("b", { style: { color: '#00796b' } }, "Passenger Van (Max Capacity): "), vehicleSpecs.maxCapacities.passengerVanVolume),
     ),
     
     // Unique Identifier
@@ -3386,7 +3463,7 @@ function CategoryPage({ category, onSelectVehicle }) {
   );
 }
 
-// Vehicle Page Component (UPDATED FOR LANDSCAPE TRANSIT LAYOUT)
+// Vehicle Page Component (No further changes)
 function VehiclePage({ vehicle, onBack, onHome }) {
   const isPortrait = window.innerWidth < window.innerHeight;
   const isTransit = vehicle.name === "Transit"; // Flag for conditional rendering
